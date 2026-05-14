@@ -1,0 +1,110 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #04040a;
+  color: #f1f0ff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Grain texture overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='256' height='256' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E");
+  opacity: 0.028;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(124, 58, 237, 0.3);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(124, 58, 237, 0.5);
+}
+
+/* Gradient headline text */
+.gradient-text {
+  background: linear-gradient(135deg, #ffffff 0%, #c4b5fd 45%, #93c5fd 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Animated shimmer CTA button */
+@keyframes btn-shimmer-anim {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 300% 50%;
+  }
+}
+
+.btn-shimmer {
+  background: linear-gradient(
+    90deg,
+    #7c3aed,
+    #8b5cf6,
+    #a78bfa,
+    #60a5fa,
+    #8b5cf6,
+    #7c3aed
+  );
+  background-size: 300% 100%;
+  animation: btn-shimmer-anim 3.5s linear infinite;
+}
+
+.btn-shimmer:hover {
+  filter: brightness(1.12);
+}
+.btn-shimmer:active {
+  filter: brightness(0.95);
+  transform: scale(0.99);
+}
+
+.btn-shimmer:disabled {
+  animation: none;
+  background: rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.25);
+  filter: none;
+}
+
+/* Step shimmer sweep on active steps */
+@keyframes step-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(350%);
+  }
+}
+
+.step-sweep {
+  animation: step-sweep 2.2s linear infinite;
+}
